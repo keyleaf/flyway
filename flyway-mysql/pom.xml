@@ -29,7 +29,11 @@
     <artifactId>flyway-mysql</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <version>${project.parent.version}</version>
+    <version>8.5.11-iap</version>
+
+    <properties>
+        <iap.osgi.version>8.5.11.iap</iap.osgi.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -150,8 +154,9 @@
                     <instructions>
                         <Automatic-Module-Name>org.flywaydb.core</Automatic-Module-Name>
                         <Bundle-SymbolicName>org.flywaydb.core</Bundle-SymbolicName>
+                        <Bundle-Version>${iap.osgi.version}</Bundle-Version>
                         <Export-Package>
-                            org.flywaydb.database;version=${project.version}
+                            org.flywaydb.database;version=${iap.osgi.version}
                         </Export-Package>
                     </instructions>
                 </configuration>
