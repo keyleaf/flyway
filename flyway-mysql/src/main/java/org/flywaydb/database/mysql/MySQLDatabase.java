@@ -31,6 +31,7 @@ import org.flywaydb.core.internal.jdbc.StatementInterceptor;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -203,6 +204,11 @@ public class MySQLDatabase extends Database<MySQLConnection> {
         return extractVersionFromString(selectVersionOutput, MARIADB_VERSION_PATTERN, MARIADB_WITH_MAXSCALE_VERSION_PATTERN);
     }
 
+    boolean isOceanBase() {
+        String selectVersionOutput = BaseDatabaseType.getSelectVersionOutput(rawMainJdbcConnection);
+        return selectVersionOutput != null && selectVersionOutput.toLowerCase(Locale.ROOT).contains("oceanbase");
+    }
+
     /*
      * Given a version string that may contain unwanted text, extract out the version part.
      */
@@ -255,7 +261,11 @@ public class MySQLDatabase extends Database<MySQLConnection> {
             recommendFlywayUpgradeIfNecessary("10.6");
         } else {
 
-            ensureDatabaseNotOlderThanOtherwiseRecommendUpgradeToFlywayEdition("8.0", org.flywaydb.core.internal.license.Edition.ENTERPRISE);
+            // OceanBase in MySQL mode reports a MySQL 5.7-compatible version even though Flyway can use the MySQL
+            // implementation to run migrations against it. Keep the edition check for genuine MySQL databases.
+            if (!isOceanBase()) {
+                ensureDatabaseNotOlderThanOtherwiseRecommendUpgradeToFlywayEdition("8.0", org.flywaydb.core.internal.license.Edition.ENTERPRISE);
+            }
 
 
 
