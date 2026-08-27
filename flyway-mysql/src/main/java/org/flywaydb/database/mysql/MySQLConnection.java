@@ -155,6 +155,10 @@ public class MySQLConnection extends Connection<MySQLDatabase> {
     }
 
     protected boolean canUseNamedLockTemplate() {
-        return !database.isPxcStrict();
+        // OceanBase MySQL mode does not consistently provide MySQL's
+        // GET_LOCK/RELEASE_LOCK functions (for example, OceanBase 4.2).
+        // Fall back to Flyway's generic lock implementation instead of
+        // failing before the schema history table can be created.
+        return !database.isPxcStrict() && !database.isOceanBase();
     }
 }
