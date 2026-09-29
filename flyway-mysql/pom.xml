@@ -29,10 +29,10 @@
     <artifactId>flyway-mysql</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <version>8.5.11-iap</version>
+    <version>8.5.13-iap</version>
 
     <properties>
-        <iap.osgi.version>8.5.11.iap</iap.osgi.version>
+        <iap.osgi.version>8.5.13.iap</iap.osgi.version>
     </properties>
 
     <dependencies>
