@@ -22,17 +22,17 @@
     <parent>
         <artifactId>flyway-parent</artifactId>
         <groupId>org.flywaydb</groupId>
-        <version>8.5.11</version>
+        <version>8.5.13</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>flyway-dameng</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <version>8.5.11-iap</version>
+    <version>8.5.13-iap</version>
 
     <properties>
-        <iap.osgi.version>8.5.11.iap</iap.osgi.version>
+        <iap.osgi.version>8.5.13.iap</iap.osgi.version>
     </properties>
 
     <dependencies>
@@ -55,8 +55,8 @@
         </dependency>
         <dependency>
             <groupId>com.dameng</groupId>
-            <artifactId>DmJdbcDriver18</artifactId>
-            <version>8.1.2.192</version>
+            <artifactId>DmJdbcDriver8</artifactId>
+            <version>8.1.5.45</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
